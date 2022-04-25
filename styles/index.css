@@ -35,6 +35,12 @@ button {
   text-align: center;
 }
 
+.filter_by_type{
+  display: grid;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
 .store--item-list {
   display: grid;
   grid-template-columns: repeat(4, 125px);
@@ -51,6 +57,12 @@ button {
 .store--item-icon {
   width: 125px;
   height: 125px;
+}
+
+.filter-by-type {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto auto auto auto 1fr;
+  padding-bottom: 10px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -72,7 +84,7 @@ button {
   padding: 1rem;
 
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto auto 1fr auto;
   grid-gap: 1rem;
   justify-content: center;
 
@@ -160,6 +172,11 @@ button {
   text-align: center;
   font-size: 0.75rem;
   font-weight: bold;
+}
+
+.sort-by-name-div {
+  display: grid;
+  justify-content: center;
 }
 
 /* Total */

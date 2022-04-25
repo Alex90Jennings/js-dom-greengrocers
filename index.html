@@ -13,6 +13,16 @@
   <body>
     <header id="store">
       <h1>Greengrocers</h1>
+      <div class="filter-by-type">
+        <div></div>
+        all
+        <input class="no-filter" type="radio" name="type" checked="checked" />
+        vegetables
+        <input class="veg-filter" type="radio" name="type" />
+        fruit
+        <input class="fruit-filter" type="radio" name="type" />
+        <div></div>
+      </div>
       <ul class="item-list store--item-list">
         <!-- Take a look at store-item.html -->
       </ul>
@@ -20,7 +30,10 @@
 
     <main id="cart">
       <h2>Your Cart</h2>
-
+      <div class="sort-by-name-div">
+        <label for="filter">Sort cart by: </label>
+        <button class="sort-by-name" name="button">A-Z</button>
+      </div>
       <div class="cart--item-list-container">
         <ul class="item-list cart--item-list">
           <!-- Take a look at cart-item.html -->

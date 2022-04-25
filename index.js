@@ -1,31 +1,38 @@
-//store header UL
 const storeItemsUL = document.querySelector(".store--item-list");
+const sortAlphabeticallyBUTTON = document.querySelector(".sort-by-name");
+const vegFilter = document.querySelector(".veg-filter");
+const fruitFilter = document.querySelector(".fruit-filter");
+const noFilter = document.querySelector(".no-filter");
+let itemsToRender = state.items;
 
-for (let i = 0; i < state.items.length; i++) {
-  const storeItemLI = document.createElement("li");
+function renderHeader() {
+  storeItemsUL.innerHTML = "";
 
-  const storeItemDIV = document.createElement("div");
-  storeItemDIV.setAttribute("class", "store--item-icon");
+  for (let i = 0; i < itemsToRender.length; i++) {
+    const storeItemLI = document.createElement("li");
 
-  const storeItemIMG = document.createElement("img");
+    const storeItemDIV = document.createElement("div");
+    storeItemDIV.setAttribute("class", "store--item-icon");
 
-  const storeItemBUTTON = document.createElement("button");
-  storeItemBUTTON.innerText = "ADD TO CART";
+    const storeItemIMG = document.createElement("img");
 
-  const veg = state.items[i];
-  storeItemIMG.src = `assets/icons/${veg.id}.svg`;
-  storeItemDIV.append(storeItemIMG);
+    const storeItemBUTTON = document.createElement("button");
+    storeItemBUTTON.innerText = "ADD TO CART";
 
-  storeItemBUTTON.addEventListener("click", () => {
-    addItemToCart(veg);
-    renderCart();
-  });
+    const veg = itemsToRender[i];
+    storeItemIMG.src = `assets/icons/${veg.id}.svg`;
+    storeItemDIV.append(storeItemIMG);
 
-  storeItemLI.append(storeItemDIV, storeItemBUTTON);
-  storeItemsUL.append(storeItemLI);
+    storeItemBUTTON.addEventListener("click", () => {
+      addItemToCart(veg);
+      renderCart();
+    });
+
+    storeItemLI.append(storeItemDIV, storeItemBUTTON);
+    storeItemsUL.append(storeItemLI);
+  }
 }
 
-//cart UL
 function renderCart() {
   const cartItemsUL = document.querySelector(".cart--item-list");
 
@@ -108,3 +115,43 @@ function totalPrice() {
   }
   totalPrice.innerText = "£ " + sum.toFixed(2);
 }
+
+function sortCartList() {
+  sortAlphabeticallyBUTTON.addEventListener("click", () => {
+    state.cart.sort((a, b) => a.name.localeCompare(b.name));
+    renderCart();
+  });
+}
+
+function filterStoreHeader() {
+  noFilter.addEventListener("click", () => {
+    itemsToRender = [...state.items];
+    renderHeader();
+  });
+
+  fruitFilter.addEventListener("click", () => {
+    itemsToRender = [];
+    for (let i = 0; i < state.items.length; i++) {
+      const veg = state.items[i];
+      if (veg.type === "fruit") {
+        itemsToRender.push(veg);
+      }
+    }
+    renderHeader();
+  });
+
+  vegFilter.addEventListener("click", () => {
+    itemsToRender = [];
+    for (let i = 0; i < state.items.length; i++) {
+      const veg = state.items[i];
+      if (veg.type === "vegetable") {
+        itemsToRender.push(veg);
+      }
+    }
+    renderHeader();
+  });
+}
+
+sortCartList();
+filterStoreHeader();
+renderHeader();
